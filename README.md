@@ -2,4 +2,5 @@
 prototipe sistem  penerbitan, penyimpanan, dan verifikasi ijazah digital berbasis blockchain
 
 Run Command
+
 uvicorn apps.api.main:app --reload
