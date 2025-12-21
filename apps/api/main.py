@@ -11,6 +11,17 @@ from .storage import *
 from .auth import *
 from .config import STORAGE_DIR
 
+import os
+
+# Memuat Public Key Institusi yang Sah (Hardcoded/Trusted)
+# Pastikan file admin_public.pem ada di root direktori (sejajar dengan main.py dijalankan)
+try:
+    with open("admin_public.pem", "r") as f:
+        TRUSTED_ISSUER_PUBKEY = f.read().strip()
+except FileNotFoundError:
+    print("WARNING: admin_public.pem tidak ditemukan. Validasi issuer tidak akan berjalan!")
+    TRUSTED_ISSUER_PUBKEY = None
+
 app = FastAPI()
 templates = Jinja2Templates(directory="apps/api/templates")
 
@@ -140,12 +151,37 @@ def verify(req: Request, tx: str, file: str, key: str):
     issue = get_tx(tx)
     if not issue:
         return {"error": "tx not found"}
+    
     p = issue["tx_data"]["payload"]
-    ct = read_ciphertext(file.split("/")[-1])
-    pt = aes_gcm_decrypt(base64.b64decode(key), base64.b64decode(p["aes_gcm_nonce_b64"]), ct)
+    
+    # 1. Cek apakah Issuer adalah Institusi yang Sah
+    tx_pubkey = issue["tx_data"].get("issuer_pubkey_pem", "").strip()
+    is_trusted_issuer = (tx_pubkey == TRUSTED_ISSUER_PUBKEY)
+
+    # 2. Dekripsi File
+    try:
+        ct = read_ciphertext(file.split("/")[-1])
+        pt = aes_gcm_decrypt(base64.b64decode(key), base64.b64decode(p["aes_gcm_nonce_b64"]), ct)
+        text_content = pt.decode() # Asumsi file teks
+    except Exception:
+        return templates.TemplateResponse("verify.html", {
+            "request": req, "valid": False, "revoked": False, "text": "Gagal dekripsi", "error": "Kunci salah atau file rusak"
+        })
+
+    # 3. Verifikasi Hash
     ok_hash = sha256_hex(pt) == p["doc_hash_sha256_hex"]
+    
+    # 4. Cek Revokasi
     revoked = is_revoked(p["cert_id"])
+    
+    # Status Valid hanya jika: Hash OK + Tidak Revoked + Issuer Sah
+    is_valid = ok_hash and not revoked and is_trusted_issuer
+
     return templates.TemplateResponse("verify.html", {
-        "request": req, "valid": ok_hash and not revoked,
-        "revoked": revoked, "text": pt.decode()
+        "request": req, 
+        "valid": is_valid,
+        "revoked": revoked,
+        "trusted_issuer": is_trusted_issuer, # Kirim status issuer ke template untuk info detail
+        "text": text_content,
+        "verify_url": str(req.url) # Kirim URL saat ini ke template untuk fitur download
     })
