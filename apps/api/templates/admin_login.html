@@ -1,0 +1,18 @@
+<!doctype html>
+<html><body>
+<h2>Admin Login</h2>
+
+{% if error %}
+  <p style="color:red;"><b>{{error}}</b></p>
+{% endif %}
+
+<form method="post">
+  <p>Paste Private Key (PEM):</p>
+  <textarea name="privkey_pem" rows="10" cols="70"></textarea><br>
+
+  <input type="hidden" name="nonce" value="{{nonce}}">
+  <button type="submit">Login</button>
+</form>
+
+<p>Catatan: gunakan file <code>admin_private.pem</code> yang Anda generate.</p>
+</body></html>
