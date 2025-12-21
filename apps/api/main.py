@@ -123,7 +123,8 @@ async def admin_issue_post(file: UploadFile):
     }
     tx_hash = append_tx(tx_data)
 
-    unlisted = f"/v?tx={tx_hash}&file={urllib.parse.quote(file_url)}&key={base64.b64encode(aes_key).decode()}"
+    key_b64 = base64.b64encode(aes_key).decode()
+    unlisted = f"/v?tx={tx_hash}&file={urllib.parse.quote(file_url)}&key={urllib.parse.quote(key_b64)}"
     return {"unlisted_url": unlisted}
 
 @app.get("/admin/revoke", response_class=HTMLResponse)
