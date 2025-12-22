@@ -1,6 +1,25 @@
-<!doctype html>
-<html><body>
-<h1>Ijazah Ledger</h1>
-<a href="/ledger">Ledger Explorer</a> |
-<a href="/admin/login">Admin</a>
-</body></html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Ijazah Ledger</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Ijazah Ledger</h1>
+            <p>Sistem Penerbitan, Penyimpanan, dan Verifikasi Ijazah Digital Berbasis Blockchain</p>
+        </header>
+
+        <nav class="navigation">
+            <a href="/ledger" class="btn primary">Ledger Explorer</a>
+            <a href="/admin/login" class="btn secondary">Admin Login</a>
+        </nav>
+
+        <footer class="footer">
+            <p>IF4020 - Kriptografi</p>
+        </footer>
+    </div>
+</body>
+</html>

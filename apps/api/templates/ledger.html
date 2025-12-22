@@ -1,8 +1,45 @@
-<!doctype html><html><body>
-<h2>Ledger (Chain valid: {{ok}})</h2>
-<ul>
-{% for t in txs %}
-<li>{{t.tx_hash}} — {{t.tx_data.type}}</li>
-{% endfor %}
-</ul>
-</body></html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Ledger Explorer - Ijazah Ledger</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Ledger Explorer</h1>
+            <p>Status Blockchain:
+                {% if ok %}
+                    <span class="status valid">Valid</span>
+                {% else %}
+                    <span class="status invalid">Tidak Valid</span>
+                {% endif %}
+            </p>
+        </header>
+
+        <section class="ledger-section">
+            {% if txs %}
+                <ul class="ledger-list">
+                    {% for t in txs %}
+                    <li class="ledger-item">
+                        <div class="tx-hash">{{ t.tx_hash }}</div>
+                        <div class="tx-type">{{ t.tx_data.type }}</div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="empty-ledger">Belum ada transaksi pada ledger.</p>
+            {% endif %}
+        </section>
+
+        <nav class="navigation">
+            <a href="/" class="btn secondary">Kembali ke Home</a>
+        </nav>
+
+        <footer class="footer">
+            <p>IF4020 - Kriptografi</p>
+        </footer>
+    </div>
+</body>
+</html>

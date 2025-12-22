@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request, UploadFile, Form
 from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 
 import uuid, time, base64, urllib.parse
@@ -23,6 +24,7 @@ except FileNotFoundError:
     TRUSTED_ISSUER_PUBKEY = None
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="apps/api/static"), name="static")
 templates = Jinja2Templates(directory="apps/api/templates")
 
 ADMIN_SESSION = {"ok": False, "pubkey": None, "privkey": None}
