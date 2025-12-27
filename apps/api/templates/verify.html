@@ -49,10 +49,11 @@
             // 1. Ambil teks asli
             const originalText = document.getElementById('original-text').value;
             
-            // 2. Ambil URL Verifikasi dari template variable
-            const verifyUrl = "{{ verify_url }}";
+            // 2. Ambil URL Verifikasi (TAMBAHKAN '| safe' DI SINI)
+            // '| safe' memberitahu template bahwa URL ini aman dan jangan ubah '&' jadi '&amp;'
+            const verifyUrl = "{{ verify_url | safe }}";
 
-            // 3. Gabungkan sesuai spesifikasi (Front-end menambahkan URL)
+            // 3. Gabungkan sesuai spesifikasi
             const finalText = originalText + "\n\n" +
                               "--------------------------------------------------\n" +
                               "Dokumen ini telah diverifikasi secara digital.\n" +
@@ -71,5 +72,6 @@
             document.body.removeChild(link);
         }
     </script>
+
 </body>
 </html>
