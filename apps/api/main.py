@@ -14,8 +14,6 @@ from .config import STORAGE_DIR
 
 import os
 
-# Memuat Public Key Institusi yang Sah (Hardcoded/Trusted)
-# Pastikan file admin_public.pem ada di root direktori (sejajar dengan main.py dijalankan)
 try:
     with open("admin_public.pem", "r") as f:
         TRUSTED_ISSUER_PUBKEY = f.read().strip()
@@ -177,7 +175,7 @@ def verify(req: Request, tx: str, file: str, key: str):
     # 4. Cek Revokasi
     revoked = is_revoked(p["cert_id"])
     
-    # Status Valid hanya jika: Hash OK + Tidak Revoked + Issuer Sah
+    # Status Valid hanya jika Hash OK + Tidak Revoked + Issuer Sah
     is_valid = ok_hash and not revoked and is_trusted_issuer
 
     return templates.TemplateResponse("verify.html", {

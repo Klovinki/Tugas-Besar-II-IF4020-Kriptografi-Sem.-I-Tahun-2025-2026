@@ -1,5 +1,10 @@
-# ---
+# Tugas-Besar-II-IF4020-Kriptografi-Sem.-I-Tahun-2025-2026
+prototipe sistem  penerbitan, penyimpanan, dan verifikasi ijazah digital berbasis blockchain
 
+Run Command
+
+uvicorn apps.api.main:app --reload
+=======
 **Tugas Besar II IF4020 Kriptografi \- Ijazah Ledger**
 
 Sistem prototipe berbasis blockchain (Centralized Immutable Ledger) untuk penerbitan, penyimpanan, dan verifikasi ijazah digital secara aman menggunakan kombinasi algoritma ECDSA, SHA-256, dan AES-GCM2222.
@@ -31,8 +36,6 @@ Sistem ini terbagi menjadi beberapa modul utama dengan fungsi sebagai berikut:
 * **admin\_issue\_post()**: Alur kerja penerbitan ijazah (hashing, enkripsi, upload, dan pencatatan ke ledger).  
 * **verify()**: Melakukan verifikasi ijazah dengan memeriksa integritas hash, status pencabutan, dan kepercayaan *issuer*.
 
-## ---
-
 **2\. Cara Menjalankan Program**
 
 ### **Prasyarat**
@@ -42,17 +45,14 @@ pastikan telah ter-install Python 3.12+ dan pip.
 ### **Langkah Instalasi**
 
 1. **Clone Repositori**:  
-   Bash  
-   git clone \<url-repo-anda\>  
-   cd \<nama-folder-repo\>
+   git clone https://github.com/Klovinki/Tugas-Besar-II-IF4020-Kriptografi-Sem.-I-Tahun-2025-2026
+   (pindah direktori ke Tugas-Besar-II-IF4020-Kriptografi-Sem.-I-Tahun-2025-2026)
 
 2. **Instal Dependensi**:  
-   Bash  
    pip install \-r requirements.txt
 
 3. Persiapan Kunci Admin:  
    Jalankan skrip berikut untuk menghasilkan kunci publik dan privat institusi:  
-   Bash  
    python gen\_key.py
 
 ### **Menjalankan Server**
@@ -65,14 +65,12 @@ uvicorn apps.api.main:app \--reload
 
 Akses aplikasi melalui browser di http://127.0.0.1:8000.
 
-## ---
-
 **3\. Pembagian Tugas**
 
 berikut adalah pembagian tugas:
 
 | Nama Anggota | NIM | Tugas & Kontribusi |
 | :---- | :---- | :---- |
-| **Anggota 1** | 13222045 | Implementasi crypto.py (ECDSA & AES-GCM), integrasi backend FastAPI, dan pembuatan gen\_key.py. |
-| **Anggota 2** | 13222119 | Pengembangan modul ledger.py (Immutable ledger & chain verification), desain skema transaksi, dan manajemen penyimpanan. |
-| **Anggota 3** | 13222001 | Pengembangan antarmuka (HTML/CSS), fungsi verifikasi di frontend, penanganan fitur download, dan dokumentasi. |
+| **Azra Haikal** | 13222045 | Implementasi crypto.py (ECDSA & AES-GCM), integrasi backend FastAPI, dan pembuatan gen\_key.py. |
+| **Klovinki Purnama** | 13222119 | Pengembangan modul ledger.py (Immutable ledger & chain verification), desain skema transaksi, dan manajemen penyimpanan. |
+| **Raga Fatwa** | 13222001 | Pengembangan antarmuka (HTML/CSS), fungsi verifikasi di frontend, penanganan fitur download, dan dokumentasi. |
