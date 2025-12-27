@@ -1,18 +1,55 @@
-<!doctype html>
-<html><body>
-<h2>Admin Login</h2>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login - Ijazah Ledger</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Admin Login</h1>
+            <p>Autentikasi administrator menggunakan Private Key</p>
+        </header>
 
-{% if error %}
-  <p style="color:red;"><b>{{error}}</b></p>
-{% endif %}
+        {% if error %}
+        <div class="error-box">
+            <strong>{{ error }}</strong>
+        </div>
+        {% endif %}
 
-<form method="post">
-  <p>Paste Private Key (PEM):</p>
-  <textarea name="privkey_pem" rows="10" cols="70"></textarea><br>
+        <form method="post" class="login-form">
+            <label for="privkey_pem">Private Key (PEM)</label>
+            <textarea
+                id="privkey_pem"
+                name="privkey_pem"
+                rows="10"
+                placeholder="-----BEGIN PRIVATE KEY-----"
+                required
+            ></textarea>
 
-  <input type="hidden" name="nonce" value="{{nonce}}">
-  <button type="submit">Login</button>
-</form>
+            <input type="hidden" name="nonce" value="{{ nonce }}">
 
-<p>Catatan: gunakan file <code>admin_private.pem</code> yang Anda generate.</p>
-</body></html>
+            <button type="submit" class="btn primary full">
+                Login
+            </button>
+        </form>
+
+        <div class="note">
+            <p>
+                Catatan: Gunakan file
+                <code>admin_private.pem</code>
+                yang telah Anda generate.
+            </p>
+        </div>
+
+        <nav class="navigation">
+            <a href="/" class="btn secondary">Kembali ke Home</a>
+        </nav>
+
+        <footer class="footer">
+            <p>IF4020 - Kriptografi</p>
+        </footer>
+    </div>
+</body>
+</html>
