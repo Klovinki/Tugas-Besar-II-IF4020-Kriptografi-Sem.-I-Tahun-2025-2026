@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Ijazah - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1>Daftar Ijazah</h1>
+        <p>Ijazah digital yang telah diterbitkan</p>
+    </header>
+
+    <table class="cert-table">
+        <thead>
+            <tr>
+                <th>Certificate ID</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for c in certs %}
+            <tr>
+                <td><code>{{ c.cert_id }}</code></td>
+                <td>
+                    {% if c.revoked %}
+                        <span class="badge revoked">REVOKED</span>
+                    {% else %}
+                        <span class="badge active">AKTIF</span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <nav class="navigation">
+        <a href="/admin/dashboard" class="btn secondary">Kembali ke Dashboard</a>
+    </nav>
+</div>
+</body>
+</html>

@@ -155,6 +155,33 @@ def admin_revoke_post(cert_id: str = Form(...), reason: str = Form(...)):
     }
     return {"tx_hash": append_tx(tx_data)}
 
+@app.get("/admin/certificates", response_class=HTMLResponse)
+def admin_certificates(req: Request):
+    if not ADMIN_SESSION["ok"]:
+        return RedirectResponse("/admin/login", status_code=303)
+
+    txs = load_all()
+
+    # Ambil hanya transaksi ISSUE
+    issues = [
+        {
+            "cert_id": t["tx_data"]["payload"]["cert_id"],
+            "tx_hash": t["tx_hash"],
+            "file_url": t["tx_data"]["payload"]["file_url"],
+            "revoked": is_revoked(t["tx_data"]["payload"]["cert_id"])
+        }
+        for t in txs
+        if t["tx_data"]["type"] == "ISSUE"
+    ]
+
+    return templates.TemplateResponse(
+        "admin_certificates.html",
+        {
+            "request": req,
+            "certs": issues
+        }
+    )
+
 # -------- Verify --------
 @app.get("/v", response_class=HTMLResponse)
 def verify(req: Request, tx: str, file: str, key: str):
