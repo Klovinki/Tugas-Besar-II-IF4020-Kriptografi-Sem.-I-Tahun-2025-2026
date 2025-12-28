@@ -1,4 +1,33 @@
-<form method="post" enctype="multipart/form-data">
-<input type="file" name="file">
-<button>Issue</button>
-</form>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Issue Ijazah - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Issue Ijazah</h1>
+            <p>Penerbitan ijazah digital dan pencatatan ke blockchain</p>
+        </header>
+
+        <form method="post" enctype="multipart/form-data" class="form-box">
+            <label for="file">Unggah File Ijazah</label>
+            <input type="file" id="file" name="file" required>
+
+            <button type="submit" class="btn primary full">
+                Terbitkan Ijazah
+            </button>
+        </form>
+
+        <nav class="navigation">
+            <a href="/admin/dashboard" class="btn secondary">Kembali ke Dashboard</a>
+        </nav>
+
+        <footer class="footer">
+            <p>IF4020 - Kriptografi</p>
+        </footer>
+    </div>
+</body>
+</html>

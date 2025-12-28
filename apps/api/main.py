@@ -88,8 +88,17 @@ def admin_login_post(req: Request, privkey_pem: str = Form(...), nonce: str = Fo
         )
 
     ADMIN_SESSION.update({"ok": True, "pubkey": pub_pem, "privkey": privkey_pem})
-    return RedirectResponse(url="/admin/issue", status_code=303)
+    return RedirectResponse(url="/admin/dashboard", status_code=303)
 
+@app.get("/admin/dashboard", response_class=HTMLResponse)
+def admin_dashboard(req: Request):
+    if not ADMIN_SESSION["ok"]:
+        return RedirectResponse("/admin/login", status_code=303)
+
+    return templates.TemplateResponse(
+        "dashboard.html",
+        {"request": req}
+    )
 
 @app.get("/admin/issue", response_class=HTMLResponse)
 def admin_issue(req: Request):

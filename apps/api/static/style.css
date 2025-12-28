@@ -189,3 +189,95 @@ body {
     font-family: monospace;
     font-size: 0.85rem;
 }
+
+/* Dashboard */
+.dashboard-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 35px;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 1px solid #e2e8f0;
+    background-color: #f8fafc;
+    transition: all 0.2s ease;
+}
+
+.action-btn h3 {
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+.action-btn p {
+    margin: 4px 0 0;
+    font-size: 0.9rem;
+    color: #475569;
+}
+
+.action-btn .icon {
+    font-size: 1.8rem;
+}
+
+.action-btn.primary h3 {
+    color: #1e40af;
+}
+
+.action-btn.primary:hover {
+    background-color: #eff6ff;
+    border-color: #bfdbfe;
+}
+
+.action-btn.danger h3 {
+    color: #991b1b;
+}
+
+.action-btn.danger:hover {
+    background-color: #fef2f2;
+    border-color: #fecaca;
+}
+
+/* Form Box */
+.form-box {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.form-box label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.form-box input[type="text"],
+.form-box input[type="file"] {
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #cbd5f5;
+    font-size: 0.9rem;
+}
+
+.form-box input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* Danger Button */
+.btn.danger {
+    background-color: #dc2626;
+    color: #ffffff;
+}
+
+.btn.danger:hover {
+    background-color: #b91c1c;
+}

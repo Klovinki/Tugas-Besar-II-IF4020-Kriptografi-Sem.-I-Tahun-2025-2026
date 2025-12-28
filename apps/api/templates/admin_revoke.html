@@ -1,5 +1,48 @@
-<form method="post">
-<input name="cert_id" placeholder="cert id">
-<input name="reason">
-<button>Revoke</button>
-</form>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Revoke Ijazah - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Revoke Ijazah</h1>
+            <p>Pencabutan validitas ijazah digital</p>
+        </header>
+
+        <form method="post" class="form-box">
+            <label for="cert_id">Certificate ID</label>
+            <input
+                type="text"
+                id="cert_id"
+                name="cert_id"
+                placeholder="Masukkan Certificate ID"
+                required
+            >
+
+            <label for="reason">Alasan Pencabutan</label>
+            <input
+                type="text"
+                id="reason"
+                name="reason"
+                placeholder="Contoh: Data tidak valid / Dibatalkan"
+                required
+            >
+
+            <button type="submit" class="btn danger full">
+                Cabut Ijazah
+            </button>
+        </form>
+
+        <nav class="navigation">
+            <a href="/admin/dashboard" class="btn secondary">Kembali ke Dashboard</a>
+        </nav>
+
+        <footer class="footer">
+            <p>IF4020 - Kriptografi</p>
+        </footer>
+    </div>
+</body>
+</html>

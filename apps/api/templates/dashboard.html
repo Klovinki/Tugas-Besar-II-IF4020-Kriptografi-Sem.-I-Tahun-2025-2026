@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Ijazah Ledger</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Admin Dashboard</h1>
+            <p>Manajemen penerbitan dan pencabutan ijazah digital</p>
+        </header>
+
+        <section class="dashboard-actions">
+            <a href="/admin/issue" class="action-btn primary">
+                <span class="icon">📄</span>
+                <div>
+                    <h3>Issue Ijazah</h3>
+                    <p>Terbitkan ijazah baru dan simpan hash ke blockchain</p>
+                </div>
+            </a>
+
+            <a href="/admin/revoke" class="action-btn danger">
+                <span class="icon">⛔</span>
+                <div>
+                    <h3>Revoke Ijazah</h3>
+                    <p>Cabut validitas ijazah yang telah diterbitkan</p>
+                </div>
+            </a>
+        </section>
+
+
+        <nav class="navigation">
+            <a href="/" class="btn secondary">Kembali ke Home</a>
+        </nav>
+
+        <footer class="footer">
+            <p>IF4020 - Kriptografi</p>
+        </footer>
+    </div>
+</body>
+</html>
